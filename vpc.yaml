@@ -154,9 +154,45 @@ Resources:
       AllocationId: !GetAtt NATEIPC.AllocationId
     DependsOn: NATEIPC
 Outputs:
-  VpcId:
+  Vpc:
     Description: "The ID of the VPC"
     Value:
       Ref: VPC
     Export:
       Name: VpcId
+  PrivateSubnetA:
+    Description: "Private Subnet A"
+    Value:
+      Ref: PrivateSubnetA
+    Export:
+      Name: PrivateSubnetAId
+  PrivateSubnetB:
+    Description: "Private Subnet B"
+    Value:
+      Ref: PrivateSubnetB
+    Export:
+      Name: PrivateSubnetBId
+  PrivateSubnetC:
+    Description: "Private Subnet C"
+    Value:
+      Ref: PrivateSubnetC
+    Export:
+      Name: PrivateSubnetCId
+  PublicSubnetA:
+    Description: "Public Subnet A"
+    Value:
+      Ref: PublicSubnetA
+    Export:
+      Name: PublicSubnetAId
+  PublicSubnetB:
+    Description: "Public Subnet B"
+    Value:
+      Ref: PublicSubnetB
+    Export:
+      Name: PublicSubnetBId
+  PublicSubnetC:
+    Description: "Public Subnet C"
+    Value:
+      Ref: PublicSubnetC
+    Export:
+      Name: PublicSubnetCId
