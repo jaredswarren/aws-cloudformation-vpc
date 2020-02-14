@@ -153,6 +153,30 @@ Resources:
         Ref: PublicSubnetC
       AllocationId: !GetAtt NATEIPC.AllocationId
     DependsOn: NATEIPC
+  PrivateRouteA:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId:
+        Ref: NATGatewayA
+      RouteTableId:
+        Ref: PrivateRouteTableA
+  PrivateRouteB:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId:
+        Ref: NATGatewayB
+      RouteTableId:
+        Ref: PrivateRouteTableB
+  PrivateRouteC:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId:
+        Ref: NATGatewayC
+      RouteTableId:
+        Ref: PrivateRouteTableC
 Outputs:
   Vpc:
     Description: "The ID of the VPC"
