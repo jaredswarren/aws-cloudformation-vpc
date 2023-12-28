@@ -49,13 +49,19 @@ Resources:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [0,!Cidr [Ref: VPCCidrBlock,6,8]]
+      Tags:
+        - Key: Name
+          Value: Public-A
   PublicSubnetB:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
-      CidrBlock: !Select [1,!Cidr [Ref: VPCCidrBlock,6,8]]  
+      CidrBlock: !Select [1,!Cidr [Ref: VPCCidrBlock,6,8]] 
+      Tags:
+        - Key: Name
+          Value: Public-B
   PublicSubnetC:
     Type: AWS::EC2::Subnet
     Properties:
@@ -63,6 +69,9 @@ Resources:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [2,!Cidr [Ref: VPCCidrBlock,6,8]]  
+      Tags:
+        - Key: Name
+          Value: Public-C
   PrivateSubnetA:
     Type: AWS::EC2::Subnet
     Properties:
@@ -70,6 +79,9 @@ Resources:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [3,!Cidr [Ref: VPCCidrBlock,6,8]]
+      Tags:
+        - Key: Name
+          Value: Private-A
   PrivateSubnetB:
     Type: AWS::EC2::Subnet
     Properties:
@@ -77,6 +89,9 @@ Resources:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [4,!Cidr [Ref: VPCCidrBlock,6,8]] 
+      Tags:
+        - Key: Name
+          Value: Private-B
   PrivateSubnetC:
     Type: AWS::EC2::Subnet
     Properties:
@@ -84,6 +99,9 @@ Resources:
         Ref: VPC
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [5,!Cidr [Ref: VPCCidrBlock,6,8]]
+      Tags:
+        - Key: Name
+          Value: Private-C
   InternetGateway:
     Type: AWS::EC2::InternetGateway
   InternetGatewayAttachment:
@@ -122,16 +140,6 @@ Resources:
     Properties:
       Domain: "vpc"
     DependsOn: VPC
-  NATEIPB:
-    Type: AWS::EC2::EIP
-    Properties:
-      Domain: "vpc"
-    DependsOn: VPC
-  NATEIPC:
-    Type: AWS::EC2::EIP
-    Properties:
-      Domain: "vpc"
-    DependsOn: VPC
   NATGatewayA:
     Type: AWS::EC2::NatGateway
     Properties:
@@ -139,20 +147,6 @@ Resources:
         Ref: PublicSubnetA
       AllocationId: !GetAtt NATEIPA.AllocationId
     DependsOn: NATEIPA
-  NATGatewayB:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      SubnetId:
-        Ref: PublicSubnetB
-      AllocationId: !GetAtt NATEIPB.AllocationId
-    DependsOn: NATEIPB
-  NATGatewayC:
-    Type: AWS::EC2::NatGateway
-    Properties:
-      SubnetId:
-        Ref: PublicSubnetC
-      AllocationId: !GetAtt NATEIPC.AllocationId
-    DependsOn: NATEIPC
   PrivateRouteA:
     Type: AWS::EC2::Route
     Properties:
@@ -166,7 +160,7 @@ Resources:
     Properties:
       DestinationCidrBlock: "0.0.0.0/0"
       NatGatewayId:
-        Ref: NATGatewayB
+        Ref: NATGatewayA
       RouteTableId:
         Ref: PrivateRouteTableB
   PrivateRouteC:
@@ -174,7 +168,7 @@ Resources:
     Properties:
       DestinationCidrBlock: "0.0.0.0/0"
       NatGatewayId:
-        Ref: NATGatewayC
+        Ref: NATGatewayA
       RouteTableId:
         Ref: PrivateRouteTableC
 Outputs:
