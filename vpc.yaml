@@ -47,6 +47,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",a]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [0,!Cidr [Ref: VPCCidrBlock,6,8]]
       Tags:
@@ -57,6 +58,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",b]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [1,!Cidr [Ref: VPCCidrBlock,6,8]] 
       Tags:
@@ -67,6 +69,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",c]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [2,!Cidr [Ref: VPCCidrBlock,6,8]]  
       Tags:
@@ -77,6 +80,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",a]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [3,!Cidr [Ref: VPCCidrBlock,6,8]]
       Tags:
@@ -87,6 +91,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",b]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [4,!Cidr [Ref: VPCCidrBlock,6,8]] 
       Tags:
@@ -97,6 +102,7 @@ Resources:
     Properties:
       VpcId:
         Ref: VPC
+      AvailabilityZone: !Join ["",[!Ref "AWS::Region",c]]
       MapPublicIpOnLaunch: 'true'
       CidrBlock: !Select [5,!Cidr [Ref: VPCCidrBlock,6,8]]
       Tags:
